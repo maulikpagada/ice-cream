@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route , Switch} from 'react-router-dom';
+import Footer from './component/Footer/Footer';
+import Header from './component/Header/Header';
+import Home from './container/Home/Home';
+import About from './container/About/About';
+import Product from './container/Product/Product';
+import Services from './container/Services/Services';
+import Gallery from './container/Gallery/Gallery';
+import Contact from './container/Contact/Contact';
+import Auth from './container/Auth/Auth';
+import Fromval from './container/Fromval/Fromval';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Switch>
+      <Route exact path={"/"} component={Home}/>
+      <Route exact path={"/about"} component={About}/>
+      <Route exact path={"/product"} component={Product}/>
+      <Route exact path={"/services"} component={Services}/>
+      <Route exact path={"/gallery"} component={Gallery}/>
+      <Route exact path={"/contact"} component={Contact}/>
+      <Route exact path={"/auth"} component={Auth}/>
+      <Route exact path={"/fromval"} component={Fromval}/>
+      </Switch>
+      <Footer />
+    </>
+
   );
 }
 
