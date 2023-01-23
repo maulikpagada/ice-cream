@@ -37,7 +37,7 @@ function Auth(props) {
             Hobby: '',
             Gender: '',
             City: '',
-            Accept: '',
+            Accept: false,
         }
 
     } else if (type === 'Login' && reset === false) {

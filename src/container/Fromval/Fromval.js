@@ -1,12 +1,28 @@
-import React, { useState , Input, validation, form} from 'react';
+import React, { useState, Input, validation, form } from 'react';
 
 function Fromval(props) {
 
-    const [name, setname] = useState('')
-    const [nameErr , setnameErr] = useState('')
-
     const [email, setemail] = useState('')
-    const [emailErr, setemailErr] = useState('')
+    const [emailErr, setemailErr] = useState(null)
+
+
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    const handleChange = event => {
+        if (!isValidEmail(event.target.value)) {
+            setemailErr('Email is invalid');
+        } else {
+            setemailErr(null);
+        }
+
+        setemail(event.target.value);
+    };
+
+    const [name, setname] = useState('')
+    const [nameErr, setnameErr] = useState('')
+
 
     const [number, setnumber] = useState('')
     const [numberErr, setnumberErr] = useState('')
@@ -28,11 +44,11 @@ function Fromval(props) {
             setnameErr('')
         }
 
-        if (email === '') {
-            setemailErr("Please enter your email.")
-        } else {
-            setemailErr('')
-        }
+        // if (email === '') {
+        //     setemailErr("Please enter your email.")
+        // } else {
+        //     setemailErr('')
+        // }
 
         if (number === '') {
             setnumberErr("Please enter your number.")
@@ -77,7 +93,8 @@ function Fromval(props) {
                     id='email'
                     type='email'
                     placeholder="email"
-                    onChange={evt => setemail(evt.target.value)}
+                    // onChange={evt => setemail(evt.target.value)}
+                    onChange={handleChange}
                 />
                 <span>{emailErr}</span>
             </form>
@@ -94,14 +111,14 @@ function Fromval(props) {
 
             <form className='form1'>
                 Gender:
-                <input 
+                <input
                     type='radio'
                     name='gender'
                     value='male'
                     onChange={evt => setgender(evt.target.value)}
                 /> male
 
-                 <input 
+                <input
                     type='radio'
                     name='gender'
                     value='female'
@@ -114,7 +131,7 @@ function Fromval(props) {
             <from className='form1'>
                 City:
 
-                <select 
+                <select
                     id='city'
                     name='city'
                     onChange={evt => setcity(evt.target.value)}
@@ -129,23 +146,23 @@ function Fromval(props) {
                 <span>{cityErr}</span>
             </from>
 
-            <from  className='from1'>
+            <from className='from1'>
                 Hobby:
-                <input 
+                <input
                     type='radio'
                     name='hobby'
                     value='music'
                     onChange={evt => sethobby(evt.target.value)}
                 /> music
 
-                <input 
+                <input
                     type='radio'
                     name='hobby'
                     value='cricket'
                     onChange={evt => sethobby(evt.target.value)}
                 /> cricket
 
-                <input 
+                <input
                     type='radio'
                     name='hobby'
                     value='coding'
@@ -153,7 +170,7 @@ function Fromval(props) {
                 /> coding
                 <span>{hobbyErr}</span>
             </from>
-            
+
 
             <button onClick={validation}>Submit</button>
         </div>
@@ -161,62 +178,3 @@ function Fromval(props) {
 }
 
 export default Fromval;
-
-
-  
-// </head>
-
-// <body>
-//     <form name="contactForm" onsubmit="return validateForm()" action="/examples/actions/confirmation.php" method="post">
-//         <h2>Application Form</h2>
-//         <div class="row">
-//             <p>Full Name</p>
-//             <input type="text" name="name">
-//             <span class="error" id="nameErr"></span>
-//         </div>
-//         <div class="row">
-//             <p>Email Address</p>
-//             <input type="text" name="email">
-//             <span class="error" id="emailErr"></span>
-//         </div>
-//         <div class="row">
-//             <p>Mobile Number</p>
-//             <input type="text" name="mobile">
-//             <span class="error" id="mobileErr"></span>
-//         </div>
-//         <div class="row">
-//             <p>Country</p>
-//             <select name="country">
-//                 <option value="0">Select</option>
-//                 <option value="au">Australia</option>
-//                 <option value="in">India</option>
-//                 <option value="us">United States</option>
-//                 <option value="uk">United Kingdom</option>
-//             </select>
-//             <span class="error" id="countryErr"></span>
-//         </div>
-//         <div class="row">
-//             <p>Gender</p>
-//             <span class="error" id="genderErr"></span>
-//             <div class="form-inline">
-//                 <p><input type="radio" name="gender" value="male"> Male</p>
-//                 <p><input type="radio" name="gender" value="female"> Female</p>
-//             </div>
-            
-//         </div>
-//         <div class="row">
-//             <p>Hobbies <i>(Optional)</i></p>
-//             <span class="error" id="hobbyErr"></span>
-//             <div class="form-inline">
-//                 <p><input type="checkbox" name="hobbies" value="sports"> Sports</p>
-//                 <p><input type="checkbox" name="hobbies" value="movies"> Movies</p>
-//                 <p><input type="checkbox" name="hobbies" value="music"> Music</p>
-//             </div>
-//         </div>
-//         <div class="row">
-//             <input type="submit" value="Submit">
-//         </div>
-//     </form>
-// </body>
-
-// </html>

@@ -11,6 +11,19 @@ function Contact(props) {
         message: yup.string().required("Please enter Message"),
     });
 
+    const storeContact = (values) => {
+        let localData = JSON.parse(localStorage.getItem("contact"));
+
+        console.log(values);
+
+        if (localData !== null) {
+            localData.push(values)
+            localStorage.setItem("contact", JSON.stringify(localData))
+        } else {
+            localStorage.setItem("contact", JSON.stringify([values]))
+        }
+    }
+
     const formikObj = useFormik({
         initialValues: {
             name: '',
@@ -21,7 +34,7 @@ function Contact(props) {
 
         validationSchema: schema,
         onSubmit: values => {
-            console.log(values);
+            storeContact(values)
         },
     });
 
