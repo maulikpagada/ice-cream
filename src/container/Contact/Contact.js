@@ -49,7 +49,8 @@ function Contact(props) {
 
         validationSchema: schema,
         onSubmit: values => {
-            storeContact(values)
+            // console.log();
+            // storeContact(values)
         },
     });
 
