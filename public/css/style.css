@@ -11436,3 +11436,10 @@ button{
   margin: 5px;
   border-radius: 20px;
 }
+
+.ContactTable{
+  text-align: center;
+  margin-left: 565px;
+  color: #e83e8c;
+  border: solid palevioletred;
+}

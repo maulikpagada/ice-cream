@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as yup from 'yup';
 import { Formik, useFormik, Form } from 'formik';
 
 
 function Contact(props) {
+
+    const [local, setlocal] = useState(null);
+
+    useEffect(() => {
+        let localData = JSON.parse(localStorage.getItem("contact"));
+
+        if (localData !== null) {
+            setlocal(localData)
+        }
+    }, [])
+
+
+
     let schema = yup.object().shape({
         name: yup.string().required("Please enter Name"),
         email: yup.string().email('Invalid email').required("Please enter Email"),
@@ -19,7 +32,9 @@ function Contact(props) {
         if (localData !== null) {
             localData.push(values)
             localStorage.setItem("contact", JSON.stringify(localData))
+            setlocal(localData)
         } else {
+            setlocal(localData)
             localStorage.setItem("contact", JSON.stringify([values]))
         }
     }
@@ -38,7 +53,7 @@ function Contact(props) {
         },
     });
 
-    const {handleSubmit, handleChange , handleBlur, errors, touched} = formikObj;
+    const { handleSubmit, handleChange, handleBlur, errors, touched } = formikObj;
 
     console.log(errors, touched);
 
@@ -66,7 +81,7 @@ function Contact(props) {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                             />
-                                            {errors.name !== '' && touched.name ? <span>{errors.name}</span>:null}
+                                            {errors.name !== '' && touched.name ? <span>{errors.name}</span> : null}
                                             <p className="help-block text-danger" />
                                         </div>
                                         <div className="col-sm-6 control-group">
@@ -78,7 +93,7 @@ function Contact(props) {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                             />
-                                            {errors.email !== '' && touched.email ? <span>{errors.email}</span>:null}
+                                            {errors.email !== '' && touched.email ? <span>{errors.email}</span> : null}
                                             <p className="help-block text-danger" />
                                         </div>
                                     </div>
@@ -91,7 +106,7 @@ function Contact(props) {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                         />
-                                        {errors.subject !== '' && touched.subject ? <span>{errors.subject}</span>:null}
+                                        {errors.subject !== '' && touched.subject ? <span>{errors.subject}</span> : null}
                                         <p className="help-block text-danger" />
                                     </div>
                                     <div className="control-group">
@@ -103,7 +118,7 @@ function Contact(props) {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                         />
-                                        {errors.message !== '' && touched.message ? <span>{errors.message}</span>:null}
+                                        {errors.message !== '' && touched.message ? <span>{errors.message}</span> : null}
                                         <p className="help-block text-danger" />
                                     </div>
                                     <div>
@@ -115,9 +130,30 @@ function Contact(props) {
                     </div>
                 </div>
             </div>
+
+            <table border="2px" className='ContactTable'>
+                <td>Name:</td>
+                <td>Email:</td>
+                <td>Subject:</td>
+                <td>Message:</td>
+                {
+                    local !== null ?
+                        local.map((a, i) => {
+                            return (
+                                <tr>
+                                    <td>{a.name}</td>
+                                    <td>{a.email}</td>
+                                    <td>{a.subject}</td>
+                                    <td>{a.message}</td>
+                                </tr>
+                            )
+                        })
+                        :
+                        null
+                }
+            </table>
+
         </div>
-
-
     );
 }
 

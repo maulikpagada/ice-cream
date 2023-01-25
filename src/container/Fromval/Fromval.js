@@ -2,46 +2,58 @@ import React, { useState, Input, validation, form } from 'react';
 
 function Fromval(props) {
 
-    const [email, setemail] = useState('')
-    const [emailErr, setemailErr] = useState(null)
+    // function isValidEmail(email) {
+    //     return /\S+@\S+\.\S+/.test(email);
+    // }
 
+    // const handleChange = event => {
+    //     if (!isValidEmail(event.target.value)) {
+    //         setemailErr('Email is invalid');
+    //     } else {
+    //         setemailErr(null);
+    //     }
 
-    function isValidEmail(email) {
-        return /\S+@\S+\.\S+/.test(email);
-    }
-
-    const handleChange = event => {
-        if (!isValidEmail(event.target.value)) {
-            setemailErr('Email is invalid');
-        } else {
-            setemailErr(null);
-        }
-
-        setemail(event.target.value);
-    };
+    //     setemail(event.target.value);
+    // };
 
     const [name, setname] = useState('')
     const [nameErr, setnameErr] = useState('')
 
+    const [email, setemail] = useState('')
+    const [emailErr, setemailErr] = useState(null)
 
     const [number, setnumber] = useState('')
     const [numberErr, setnumberErr] = useState('')
 
-    const [gender, setgender] = useState('')
-    const [genderErr, setgenderErr] = useState('')
+    // const [gender, setgender] = useState('')
+    // const [genderErr, setgenderErr] = useState('')
 
-    const [city, setcity] = useState('')
-    const [cityErr, setcityErr] = useState('')
+    // const [city, setcity] = useState('')
+    // const [cityErr, setcityErr] = useState('')
 
-    const [hobby, sethobby] = useState('')
-    const [hobbyErr, sethobbyErr] = useState('')
+    // const [hobby, sethobby] = useState('')
+    // const [hobbyErr, sethobbyErr] = useState('')
 
     const validation = () => {
         console.log(name);
+
+        // if (name === '') {
+        //     setnameErr("Please enter your name.")
+        // } else {
+        //     setnameErr('')
+        // }
+
         if (name === '') {
             setnameErr("Please enter your name.")
+            if ((number === "")) {
+                setnumberErr('number is requrid')
+            } else {
+                setnumberErr('')
+            }
         } else {
-            setnameErr('')
+            if ((number === "")) {
+                setnumberErr('number is requrid')
+            }
         }
 
         // if (email === '') {
@@ -50,29 +62,42 @@ function Fromval(props) {
         //     setemailErr('')
         // }
 
-        if (number === '') {
-            setnumberErr("Please enter your number.")
+        if (email === '') {
+            setemailErr("please enter your email.")
+            if ((number === "")) {
+                setnumberErr('number is requrid')
+            } else {
+                setnumberErr('')
+            }
         } else {
-            setnumberErr('')
+            if ((number === "")) {
+                setnumberErr('number is requrid')
+            }
         }
 
-        if (gender === '') {
-            setgenderErr("Please only 1 select.")
-        } else {
-            setgenderErr('')
-        }
+        // if (number === '') {
+        //     setnumberErr("Please enter your number.")
+        // } else {
+        //     setnumberErr('')
+        // }
 
-        if (city === '') {
-            setcityErr("Please only 1 select.")
-        } else {
-            setcityErr('')
-        }
+        // if (gender === '') {
+        //     setgenderErr("Please only 1 select.")
+        // } else {
+        //     setgenderErr('')
+        // }
 
-        if (hobby === '') {
-            sethobbyErr("Please only 2 select.")
-        } else {
-            sethobbyErr('')
-        }
+        // if (city === '') {
+        //     setcityErr("Please only 1 select.")
+        // } else {
+        //     setcityErr('')
+        // }
+
+        // if (hobby === '') {
+        //     sethobbyErr("Please only 2 select.")
+        // } else {
+        //     sethobbyErr('')
+        // }
 
     }
 
@@ -93,13 +118,12 @@ function Fromval(props) {
                     id='email'
                     type='email'
                     placeholder="email"
-                    // onChange={evt => setemail(evt.target.value)}
-                    onChange={handleChange}
+                    onChange={evt => setemail(evt.target.value)}
                 />
                 <span>{emailErr}</span>
             </form>
 
-            <form className='form1'>
+            {/* <form className='form1'>
                 <input
                     id='number'
                     type='number'
@@ -107,9 +131,9 @@ function Fromval(props) {
                     onChange={evt => setnumber(evt.target.value)}
                 />
                 <span>{numberErr}</span>
-            </form>
+            </form> */}
 
-            <form className='form1'>
+            {/* <form className='form1'>
                 Gender:
                 <input
                     type='radio'
@@ -169,7 +193,7 @@ function Fromval(props) {
                     onChange={evt => sethobby(evt.target.value)}
                 /> coding
                 <span>{hobbyErr}</span>
-            </from>
+            </from> */}
 
 
             <button onClick={validation}>Submit</button>
