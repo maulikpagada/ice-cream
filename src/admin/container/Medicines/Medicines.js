@@ -13,9 +13,9 @@ import { Formik, useFormik, Form } from 'formik';
 function Medicines(props) {
 
     let schema = yup.object().shape({
-        name: yup.string().required("Please enter Name"),
-        price: yup.string().required("Please enter Price"),
-        quantity: yup.string().required("Please enter Quantity"),
+        name: yup.string().matches(/^[A-Za-z ]*$/, 'Please enter valid name').required("Please enter Name"),
+        price: yup.number().positive("Must be more than 0").integer("Must be more than 0").required("This field is required"),
+        quantity: yup.number().required("Please enter Quantity"),
     });
 
     const formikObj = useFormik({
