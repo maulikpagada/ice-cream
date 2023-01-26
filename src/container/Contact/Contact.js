@@ -15,8 +15,6 @@ function Contact(props) {
         }
     }, [])
 
-
-
     let schema = yup.object().shape({
         name: yup.string().required("Please enter Name"),
         email: yup.string().email('Invalid email').required("Please enter Email"),
