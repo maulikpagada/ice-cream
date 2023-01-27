@@ -9,8 +9,22 @@ import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup';
 import { Formik, useFormik, Form } from 'formik';
 import { DataGrid } from '@mui/x-data-grid';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Medicines(props) {
+
+    const [dopen, setDOpen] = React.useState(false);
+
+    const [dID, setDID] = useState();
+
+    const handleDClickOpen = () => {
+        setDOpen(true);
+    };
+
+    const handleDClose = () => {
+        setDOpen(false);
+    };
 
     const [medData, setMedData] = useState([]);
 
@@ -23,11 +37,37 @@ function Medicines(props) {
         }
     }, []);
 
+    const handleDelete = () => {
+        let localData = JSON.parse(localStorage.getItem("medicines"));
+
+        let Ddata = localData.filter((l) => l.id !== dID)
+
+        localStorage.setItem("medicines" , JSON.stringify(Ddata))
+
+        setMedData(Ddata)
+
+        handleDClose();
+        setDID();
+    }
+
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
         { field: 'name', headerName: 'Name', width: 130 },
         { field: 'price', headerName: 'Price', width: 130 },
         { field: 'quantity', headerName: 'Quantity', width: 130 },
+        {
+            field: 'Action',
+            handerName: 'Action',
+            renderCell: (params) => {
+                return (
+                    <>
+                        <IconButton onClick={() => {setDID(params.row.id); setDOpen(true) }} aria- label="delete">
+                            <DeleteIcon />
+                        </IconButton>
+                    </>
+                )
+            }
+        }
     ];
 
     let schema = yup.object().shape({
@@ -65,6 +105,8 @@ function Medicines(props) {
         onSubmit: values => {
             console.log(values);
             handleAdd(values)
+            setOpen(false);
+
         }
     })
 
@@ -80,10 +122,11 @@ function Medicines(props) {
         setOpen(false);
     };
     return (
+
         <div>
             <h1>Medicines</h1>
             <div>
-                <Button sx={{ variant: "outlined", left: "1300px", border: "2px solid blue", borderRadius: "10px", marginBottom: "10px" }} onClick={handleClickOpen}>
+                <Button sx={{ variant: "outlined", left: "1300px", border: "2px solid blue", borderRadius: "10px", marginBottom: "10px", marginTop: '-87px' }} onClick={handleClickOpen}>
                     Add Medicines
                 </Button>
                 <Dialog open={open} onClose={handleClose}>
@@ -114,7 +157,7 @@ function Medicines(props) {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
-                                
+
                                 {errors.price !== '' && touched.price ? <span>{errors.price}</span> : null}
 
                                 <TextField
@@ -133,6 +176,8 @@ function Medicines(props) {
                                     <Button onClick={handleClose}>Cancel</Button>
                                     <Button type='submit'>Add</Button>
                                 </DialogActions>
+
+
                             </Form>
                         </Formik>
 
@@ -150,7 +195,26 @@ function Medicines(props) {
                     checkboxSelection
                 />
             </div>
-        </div >
+
+            <Dialog
+                open={dopen}
+                onClose={handleDClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure delete number
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDelete}>Yes</Button>
+                    <Button onClick={() => handleDelete()} autoFocus>
+                        No
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
 
     );
 }
