@@ -6,7 +6,7 @@ import { Button, FormGroup, Label, Input, Container } from 'reactstrap';
 
 function Auth(props) {
 
-    const [type, setType] = useState('Signup');
+    const [type, setType] = useState('Login');
     const [reset, setReset] = useState(false);
 
     let schemaObj;
@@ -63,12 +63,17 @@ function Auth(props) {
 
     console.log(schemaObj, init);
 
+    const handleUtili = (data) => {
+        localStorage.setItem("User", JSON.stringify(data))
+    }
+
     let schema = yup.object().shape(schemaObj);
     const formikObj = useFormik({
         initialValues: init,
         validationSchema: schema,
         enableReinitialize: true,
         onSubmit: values => {
+            handleUtili(values);
             console.log(values);
         }
     });
