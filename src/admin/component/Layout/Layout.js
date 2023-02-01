@@ -17,12 +17,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import { NavLink } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 const menuData = [
-    { labal: 'Medicines', to: '/Medicines', icon: <LocalHospitalIcon /> }
+    { labal: 'Medicines', to: '/Medicines', icon: <LocalHospitalIcon /> },
+    { labal: 'User', to: '/User', icon: <AccessibilityIcon /> }
 ]
 
 
@@ -72,7 +74,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-export default function Layout({children}) {
+export default function Layout({ children }) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 

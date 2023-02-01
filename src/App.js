@@ -11,6 +11,7 @@ import Auth from './container/Auth/Auth';
 import Fromval from './container/Fromval/Fromval';
 import Layout from './admin/component/Layout/Layout';
 import Medicines from './admin/container/Medicines/Medicines';
+import User from './admin/container/User/User';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
     <Layout>
       <Switch>
       <Route exact path={"/Medicines"} component={Medicines}/>
+      {/* <Route exact path={"/User"} component={User}/> */}
       </Switch>
     </Layout>
 

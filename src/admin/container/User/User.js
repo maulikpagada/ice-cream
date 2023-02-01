@@ -13,22 +13,10 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-function Medicines(props) {
-
-    const [medData, setMedData] = useState([]);
+function User(props) {
     const [dopen, setDOpen] = React.useState(false);
-    const [dID, setDID] = useState();
-    const [eId, setEID] = useState();
-    const [open, setOpen] = React.useState(false);
 
-    useEffect(() => {
-
-        let localData = JSON.parse(localStorage.getItem("medicines"));
-
-        if (localData !== null) {
-            setMedData(localData)
-        }
-    }, []);
+    const [aID, setaID] = useState();
 
     const handleDClickOpen = () => {
         setDOpen(true);
@@ -36,36 +24,45 @@ function Medicines(props) {
 
     const handleDClose = () => {
         setDOpen(false);
-    };   
+    };
+
+    const [medData, setMedData] = useState([]);
+
+    useEffect(() => {
+        let localData = JSON.parse(localStorage.getItem("user"));
+
+        if (localData != null) {
+            setMedData(localData)
+        }
+    }, [])
 
     const handleDelete = () => {
-        let localData = JSON.parse(localStorage.getItem("medicines"));
+        let localData = JSON.parse(localStorage.getItem("user"));
 
-        let Ddata = localData.filter((l) => l.id !== dID)
+        let Ddata = localData.filter((l) => l.id !== aID)
 
-        localStorage.setItem("medicines", JSON.stringify(Ddata))
+        localStorage.setItem("user", JSON.stringify(Ddata))
 
         setMedData(Ddata)
 
         handleDClose();
-        setDID();
+        setaID();
     }
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'age', headerName: 'Age', width: 70 },
         { field: 'name', headerName: 'Name', width: 130 },
-        { field: 'price', headerName: 'Price', width: 130 },
-        { field: 'quantity', headerName: 'Quantity', width: 130 },
+        { field: 'email', headerName: 'Email', width: 130 },
         {
-            field: 'Action',
-            headerName: 'Action',
+            field: 'ActionDeleteEdit',
+            headerName: 'ActionDeleteEdit',
             renderCell: (params) => {
                 return (
                     <>
-                        <IconButton onClick={() => { setDID(params.row.id); setDOpen(true) }} aria- label="delete">
+                        <IconButton onClick={() => { setaID(params.row.id); setDOpen(true) }} aria- label="delete">
                             <DeleteIcon />
                         </IconButton>
-                        <IconButton onClick={() => {handleupdate(params.row)}} aria- label="Edit">
+                        <IconButton onClick={handleClickOpen} aria- label="Edit">
                             <EditIcon />
                         </IconButton>
                     </>
@@ -76,13 +73,13 @@ function Medicines(props) {
 
     let schema = yup.object().shape({
         name: yup.string().required("Please enter Name"),
-        price: yup.number().positive("Must be more than 0").integer("Must be more than 0").required("This field is required"),
-        quantity: yup.number().required("Please enter Quantity"),
+        age: yup.number().required("Please enter your Age"),
+        email: yup.string().email("please enter your Email")
     });
 
     const handleAdd = (values) => {
 
-        let localData = JSON.parse(localStorage.getItem("medicines"));
+        let localData = JSON.parse(localStorage.getItem("user"));
 
         let idData = Math.round(Math.random() * 1000);
 
@@ -90,43 +87,32 @@ function Medicines(props) {
 
         if (localData !== null) {
             localData.push(data)
-            localStorage.setItem("medicines", JSON.stringify(localData))
+            localStorage.setItem("user", JSON.stringify(localData))
             setMedData(localData)
         } else {
-            localStorage.setItem("medicines", JSON.stringify([data]))
+            localStorage.setItem("user", JSON.stringify([data]))
             setMedData(data)
         }
-    }
-
-    const handleupdateData = () => {
-
     }
 
     const formikObj = useFormik({
         initialValues: {
             name: '',
-            price: '',
-            quantity: ''
+            age: '',
+            email: ''
         },
 
         validationSchema: schema,
         onSubmit: values => {
-            if (eId) {
-                handleupdateData()
-            } else {
-                handleAdd(values)
-            }
+            console.log(values);
+            handleAdd(values)
             setOpen(false);
         }
     })
 
-    const { handleSubmit, handleChange, handleBlur, errors, touched, setValues, values, setFieldValue } = formikObj;
+    const { handleSubmit, handleChange, handleBlur, errors, touched } = formikObj;
 
-    const handleupdate = (values) => {
-        setEID(values)
-        setOpen(true)
-        setValues(values)
-    }
+    const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -135,30 +121,26 @@ function Medicines(props) {
     const handleClose = () => {
         setOpen(false);
     };
-    return (
 
+    return (
         <div>
-            <h1>Medicines</h1>
+            <h1>User</h1>
             <div>
-                <Button sx={{ variant: "outlined", left: "1300px", border: "2px solid blue", borderRadius: "10px", marginBottom: "10px", marginTop: '-87px' }} onClick={handleClickOpen}>
-                    Add Medicines
+                <Button sx={{ variant: "outlined", left: "1300px"}} onClick={handleClickOpen}>
+                    Add User
                 </Button>
                 <Dialog open={open} onClose={handleClose}>
-                    {
-                        eId ? <DialogTitle>update Medicines</DialogTitle> : <DialogTitle>Add Medicines</DialogTitle>
-                    }
-
+                    <DialogTitle>Add Medicines</DialogTitle>
                     <DialogContent>
                         <Formik values={formikObj}>
                             <Form onSubmit={handleSubmit}>
                                 <TextField
                                     margin="dense"
-                                    id="Add Medicines"
-                                    label="Medicines Name "
+                                    id="Add User"
+                                    label="User Name "
                                     type="text"
                                     fullWidth
                                     name="name"
-                                    value={values.name}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
@@ -167,35 +149,36 @@ function Medicines(props) {
 
                                 <TextField
                                     margin="dense"
-                                    id="price"
-                                    label="Medicines Price"
-                                    type="number"
+                                    id="Add age"
+                                    label="your age "
+                                    type="text"
                                     fullWidth
-                                    name="price"
+                                    name="age"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
 
-                                {errors.price !== '' && touched.price ? <span>{errors.price}</span> : null}
+                                {errors.age !== '' && touched.age ? <span>{errors.age}</span> : null}
 
                                 <TextField
                                     margin="dense"
-                                    id="quantity"
-                                    label="Medicines Quantity "
-                                    type="number"
+                                    id="Add Email"
+                                    label="Email "
+                                    type="text"
                                     fullWidth
-                                    name="quantity"
+                                    name="Email"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
-                                {errors.quantity !== '' && touched.quantity ? <span>{errors.quantity}</span> : null}
+
+                                {errors.email !== '' && touched.email ? <span>{errors.email}</span> : null}
 
                                 <DialogActions>
                                     <Button onClick={handleClose}>Cancel</Button>
-                                    {
-                                        eId ? <Button type='submit'>Update</Button> : <Button type='submit'>Add</Button>
-                                    }
+                                    <Button type='submit'>Add</Button>
                                 </DialogActions>
+
+
                             </Form>
                         </Formik>
 
@@ -222,7 +205,7 @@ function Medicines(props) {
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Are you sure delete number
+                        Are you sure delete id
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -239,4 +222,4 @@ function Medicines(props) {
     );
 }
 
-export default Medicines;
+export default User;
