@@ -16,18 +16,16 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import { NavLink } from 'react-router-dom';
+import IcecreamIcon from '@mui/icons-material/Icecream';
 
 const drawerWidth = 240;
 
-const menuData = [
-    { labal: 'Medicines', to: '/Medicines', icon: <LocalHospitalIcon /> },
+const iceData = [
+    { labal: 'Aproduct', to: '/Aproduct', icon: <IcecreamIcon /> },
     { labal: 'User', to: '/User', icon: <AccessibilityIcon /> }
 ]
-
-
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -69,7 +67,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
 }));
@@ -125,7 +122,7 @@ export default function Layout({ children }) {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {menuData.map((m, i) => (
+                    {iceData.map((m, i) => (
                         <ListItem
                             key={i}
                             disablePadding

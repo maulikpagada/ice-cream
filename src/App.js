@@ -10,13 +10,16 @@ import Contact from './container/Contact/Contact';
 import Auth from './container/Auth/Auth';
 import Fromval from './container/Fromval/Fromval';
 import Layout from './admin/component/Layout/Layout';
-import Medicines from './admin/container/Medicines/Medicines';
 import User from './admin/container/User/User';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import { configuerState } from './redux/store';
+// import Aproduct from './admin/AProduct/Aproduct'
 
 
 function App() {
+
+  const store = configuerState();
   return (
     <>
       <Header />
@@ -31,14 +34,16 @@ function App() {
         <PublicRoute exact path={"/fromval"} component={Fromval} />
       </Switch>
       <Footer />
+
+      {/* <Layout>
+        <Switch>
+          <Route exact path={"/User"} component={User} />
+          <Route exact path={"/AProduct"} component={Aproduct} />
+        </Switch>
+      </Layout> */}
     </>
 
-    // <Layout>
-    //   <Switch>
-    //   <Route exact path={"/Medicines"} component={Medicines}/>
-    //   {/* <Route exact path={"/User"} component={User}/> */}
-    //   </Switch>
-    // </Layout>
+
 
   );
 }
