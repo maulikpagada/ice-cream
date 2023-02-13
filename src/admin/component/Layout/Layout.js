@@ -24,7 +24,8 @@ const drawerWidth = 240;
 
 const iceData = [
     { labal: 'Aproduct', to: '/Aproduct', icon: <IcecreamIcon /> },
-    { labal: 'User', to: '/User', icon: <AccessibilityIcon /> }
+    { labal: 'User', to: '/User', icon: <AccessibilityIcon /> },
+    { labal: 'Counter', to: '/Counter', icon: <IcecreamIcon />}
 ]
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(

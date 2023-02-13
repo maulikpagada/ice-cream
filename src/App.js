@@ -3,7 +3,7 @@ import Footer from './component/Footer/Footer';
 import Header from './component/Header/Header';
 import Home from './container/Home/Home';
 import About from './container/About/About';
-import Product from './container/Product/Product';
+// import Product from './container/Product/Product';
 import Services from './container/Services/Services';
 import Gallery from './container/Gallery/Gallery';
 import Contact from './container/Contact/Contact';
@@ -13,16 +13,19 @@ import Layout from './admin/component/Layout/Layout';
 import User from './admin/container/User/User';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
-import { configuerState } from './redux/store';
-// import Aproduct from './admin/AProduct/Aproduct'
+import Aproduct from './admin/AProduct/Aproduct'
+import { Provider } from 'react-redux';
+import { configureState } from './redux/store';
+import Counter from './container/counter/Counter';
 
 
 function App() {
 
-  const store = configuerState();
+  const store = configureState();
+
   return (
     <>
-      <Header />
+      {/* <Header />
       <Switch>
         <PublicRoute exact path={"/"} component={Home} />
         <PublicRoute exact path={"/about"} component={About} />
@@ -33,18 +36,18 @@ function App() {
         <PublicRoute exact path={"/auth"} restricted={true} component={Auth} />
         <PublicRoute exact path={"/fromval"} component={Fromval} />
       </Switch>
-      <Footer />
+      <Footer /> */}
 
-      {/* <Layout>
+      <Provider store={store}>
+      <Layout>
         <Switch>
           <Route exact path={"/User"} component={User} />
           <Route exact path={"/AProduct"} component={Aproduct} />
+          <Route exact path={"/Counter"} component={Counter} />
         </Switch>
-      </Layout> */}
+      </Layout>
+      </Provider>
     </>
-
-
-
   );
 }
 

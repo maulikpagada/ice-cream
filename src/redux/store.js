@@ -1,9 +1,9 @@
-import { createStore } from "redux";
-import { counterRedux } from "./reducer/counter.reducer";
+import { applyMiddleware, createStore } from "redux";
+import thunk from 'redux-thunk';
+import { rootReducer } from "./reducer";
 
 
-export const configuerState = () => {
-    const store = createStore(counterRedux);
-
+export const configureState = () => {
+    const store = createStore(rootReducer, applyMiddleware(thunk));
     return store;
 }
