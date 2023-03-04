@@ -13,14 +13,20 @@ import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteicecream, geticecream, posticecream, puticecream } from '../../redux/action/Aproduct.action';
 
 function Aproduct(props) {
     const [MedData, setMedData] = useState([]);
     const [did, setDid] = useState();
     const [eid, setEid] = useState();
     const [dopen, setDOpen] = React.useState(false);
+    const icecreamData = useSelector(state => state.icecream);
+    const dispatch = useDispatch();
 
-    const handleDClickOpen = () => {
+    // console.log(icecreamData.icecream);
+
+    const handleDClickOpen = () => {    
         setDOpen(true);
     };
 
@@ -29,25 +35,33 @@ function Aproduct(props) {
     };
 
     useEffect(() => {
-        let localData = JSON.parse(localStorage.getItem("ice"));
-
-        if (localData !== null) {
-            setMedData(localData)
-        }
+        dispatch(geticecream())
     }, [])
 
-    const hendelDelet = () => {
+    const iceData = (values) => {
+        dispatch(posticecream(values))
+    }
 
-        let localData = JSON.parse(localStorage.getItem("ice"));
+    const handleUpdateData = (values) => {
+        setEid("");
+        setValues();
+        formikobj.resetForm()
 
-        let dData = localData.filter((l) => l.id !== did);
+        dispatch(puticecream(values))
+    }
 
-        localStorage.setItem("ice", JSON.stringify(dData));
-        setMedData(dData)
 
+    // const hendelDelete = (id) => {
+    //     console.log(id);
+    //     dispatch(deleteicecream(id));
+    //     handleDClose();
+    //     setDid();
+    // }
+
+    const hendelDelete = (id) => {
         handleDClose();
         setDid();
-
+        dispatch(deleteicecream(id));
     }
 
     const columns = [
@@ -87,22 +101,7 @@ function Aproduct(props) {
         year: yup.number().required("please enter Year").positive().integer(),
     });
 
-    const iceData = (values) => {
-        let localData = JSON.parse(localStorage.getItem("ice"));
-
-        let idData = Math.round(Math.random() * 1000);
-        let Mdata = { ...values, id: idData }
-
-        if (localData !== null) {
-            localData.push(Mdata)
-            localStorage.setItem("ice", JSON.stringify(localData))
-            setMedData(localData)
-        } else {
-            setMedData([Mdata])
-            localStorage.setItem("ice", JSON.stringify([Mdata]))
-        }
-        formikobj.resetForm()
-    }
+    
     const formikobj = useFormik({
         initialValues: {
             name: '',
@@ -132,26 +131,7 @@ function Aproduct(props) {
         setValues(values);
     }
 
-    const handleUpdateData = (values) => {
-        
-        let localData = JSON.parse(localStorage.getItem("ice"));
-
-        let updateData = localData.map((l) => {
-
-            if (l.id === values.id) {
-                return values;
-            } else {
-                return l;
-            }
-        })
-
-        localStorage.setItem("ice", JSON.stringify(updateData))
-        setMedData(updateData)
-        setEid("");
-        setValues();
-        formikobj.resetForm()
-    }
-
+    
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -277,7 +257,7 @@ function Aproduct(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => handleDClose()}>Disagree</Button>
-                    <Button onClick={() => hendelDelet()} autoFocus>
+                    <Button onClick={() => hendelDelete()} autoFocus>
                         Agree
                     </Button>
                 </DialogActions>
@@ -285,7 +265,7 @@ function Aproduct(props) {
 
             <div style={{ height: 400, width: '80%', margin: '0px auto 0px auto' }}>
                 <DataGrid
-                    rows={MedData}
+                    rows={icecreamData.icecream}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}

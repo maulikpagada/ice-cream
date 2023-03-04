@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { counterRedux } from "./counter.reducer";
+import { icecreamReducer } from "./icecream.reducer";
 
 export const rootReducer = combineReducers({
-    count:counterRedux
+    icecream: icecreamReducer  
 })

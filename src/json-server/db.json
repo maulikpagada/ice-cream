@@ -1,0 +1,33 @@
+{
+  "icecream": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "name": "qq",
+      "qua": 4454,
+      "price": 45,
+      "year": 45,
+      "id": 2
+    },
+    {
+      "name": "tyjy",
+      "qua": 4543,
+      "price": 124545,
+      "year": 2078,
+      "id": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

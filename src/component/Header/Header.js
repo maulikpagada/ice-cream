@@ -1,11 +1,18 @@
 import React from 'react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import ThemeContext from '../../context/ThemeContext';
 
 function Header(props) {
+
+    const themeData = useContext(ThemeContext);
+
+    console.log(themeData.theme);
+
     return (
         <div>
             <div>
-                <div className="container-fluid bg-primary py-3 d-none d-md-block">
+                <div className={"container-fluid bg-primary py-3 d-none d-md-block " + (themeData.theme === 'light' ? 'light' : 'dark')}>
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
@@ -34,6 +41,7 @@ function Header(props) {
                                     <a className="text-white pl-3" href>
                                         <i className="fab fa-youtube" />
                                     </a>
+                                    <button onClick={() => themeData.toggle_theme(themeData.theme)} className="theme-button">Change Theme</button>
                                 </div>
                             </div>
                         </div>

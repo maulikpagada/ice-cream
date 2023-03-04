@@ -1,10 +1,16 @@
 import React from 'react';
+import { useContext } from 'react';
+import ThemeContext from '../../context/ThemeContext';
 
 function Footer(props) {
+
+    const themeData = useContext(ThemeContext)
+
+    
     return (
         <>
             <div className="container-fluid footer bg-light py-5" style={{ marginTop: 90 }}>
-                <div className="container text-center py-5">
+                <div className={"container text-center py-5 " + (themeData.theme === 'light' ? 'light' : 'dark')}>
                     <div className="row">
                         <div className="col-12 mb-4">
                             <a href="index.html" className="navbar-brand m-0">

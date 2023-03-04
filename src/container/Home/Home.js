@@ -1,7 +1,12 @@
 import React from 'react';
+import { useContext } from 'react';
 import Slider from "react-slick";
+import ThemeContext from '../../context/ThemeContext';
 
 function Home(props) {
+
+    const themeData = useContext(ThemeContext)
+
     const settings = {
         infinite: true,
         speed: 500,
@@ -27,7 +32,7 @@ function Home(props) {
 
     return (
         <>
-            <div className="container-fluid p-0 mb-5 pb-5">
+            <div className={"container-fluid p-0 mb-5 pb-5 " + (themeData.theme === 'light' ? 'light' : 'dark')}>
                 <div id="header-carousel" className="carousel slide" data-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
@@ -62,7 +67,7 @@ function Home(props) {
                         </div>
                     </a>
                 </div>
-                {/* Carousel End */}
+                {/* Carousel End */}    
                 {/* About Start */}
                 <div className="container-fluid py-5">
                     <div className="container py-5">

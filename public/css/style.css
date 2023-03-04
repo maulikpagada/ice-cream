@@ -11370,7 +11370,7 @@ h6,
   height: 5px;
   border-radius: 15px;
   left: 280px;
-  top: 40px; 
+  top: 40px;
 }
 
 .custom-dot button {
@@ -11386,7 +11386,7 @@ h6,
   border: none;
 }
 
-.custom-dot .slick-active button{
+.custom-dot .slick-active button {
   background-color: #62C3E7;
 }
 
@@ -11401,7 +11401,7 @@ h6,
   border-radius: 20px;
 }
 
-.custom-dot button:hover{
+.custom-dot button:hover {
   background: #62C3E7;
   transition: 0.5s;
 }
@@ -11411,35 +11411,55 @@ h6,
   border-radius: 50% !important;
 }
 
-.formval{
+.formval {
   text-align: center;
   margin: 20px;
   padding: 20px;
   box-shadow: #007bff;
 }
 
-.form1{
+.form1 {
   margin: 15px;
   padding: 0;
 }
 
-.form2{
+.form2 {
   margin: 15px;
 }
 
-.form2{
+.form2 {
   margin: 15px;
-  
+
 }
 
-button{
+button {
   margin: 5px;
   border-radius: 20px;
 }
 
-.ContactTable{
+.ContactTable {
   text-align: center;
   margin-left: 565px;
   color: #e83e8c;
   border: solid palevioletred;
+}
+
+.theme-button{
+  background-color: white;
+  border-color: white;
+  color: #F195B2;
+  margin-left: 20px;
+}
+
+.light {
+  color: #000 !important;
+}
+
+.dark {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.about-container .container{
+  background-color: white !important;
 }

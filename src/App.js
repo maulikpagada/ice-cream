@@ -17,6 +17,7 @@ import Aproduct from './admin/AProduct/Aproduct'
 import { Provider } from 'react-redux';
 import { configureState } from './redux/store';
 import Counter from './container/counter/Counter';
+import { ThemeProvider } from './context/ThemeContext';
 
 
 function App() {
@@ -25,27 +26,29 @@ function App() {
 
   return (
     <>
-      {/* <Header />
-      <Switch>
-        <PublicRoute exact path={"/"} component={Home} />
-        <PublicRoute exact path={"/about"} component={About} />
-        <PrivateRoute exact path={"/product"} component={Product} />
-        <PublicRoute exact path={"/services"} component={Services} />
-        <PublicRoute exact path={"/gallery"} component={Gallery} />
-        <PublicRoute exact path={"/contact"} component={Contact} />
-        <PublicRoute exact path={"/auth"} restricted={true} component={Auth} />
-        <PublicRoute exact path={"/fromval"} component={Fromval} />
-      </Switch>
-      <Footer /> */}
+      {/* <ThemeProvider>
+        <Header />
+        <Switch>
+          <PublicRoute exact path={"/"} component={Home} />
+          <PublicRoute exact path={"/about"} component={About} />
+          <PrivateRoute exact path={"/product"} component={Product} />
+          <PublicRoute exact path={"/services"} component={Services} />
+          <PublicRoute exact path={"/gallery"} component={Gallery} />
+          <PublicRoute exact path={"/contact"} component={Contact} />
+          <PublicRoute exact path={"/auth"} restricted={true} component={Auth} />
+          <PublicRoute exact path={"/fromval"} component={Fromval} />
+        </Switch>
+        <Footer />
+      </ThemeProvider> */}
 
       <Provider store={store}>
-      <Layout>
-        <Switch>
-          <Route exact path={"/User"} component={User} />
-          <Route exact path={"/AProduct"} component={Aproduct} />
-          <Route exact path={"/Counter"} component={Counter} />
-        </Switch>
-      </Layout>
+        <Layout>
+          <Switch>
+            <Route exact path={"/User"} component={User} />
+            <Route exact path={"/AProduct"} component={Aproduct} />
+            <Route exact path={"/Counter"} component={Counter} />
+          </Switch>
+        </Layout>
       </Provider>
     </>
   );
