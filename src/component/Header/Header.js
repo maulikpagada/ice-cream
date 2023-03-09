@@ -47,7 +47,7 @@ function Header(props) {
                         </div>
                     </div>
                 </div>
-                <div className="container-fluid position-relative nav-bar p-0">
+                <div className={"container-fluid position-relative nav-bar p-0 " + (themeData.theme === 'light' ? 'light' : 'dark')}>
                     <div className="container-lg position-relative p-0 px-lg-3" style={{ zIndex: 9 }}>
                         <nav className="navbar navbar-expand-lg bg-white navbar-light shadow p-lg-0">
                             <a href="index.html" className="navbar-brand d-block d-lg-none">

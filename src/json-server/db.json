@@ -1,11 +1,6 @@
 {
   "icecream": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    },
-    {
       "name": "qq",
       "qua": 4454,
       "price": 45,
@@ -18,6 +13,13 @@
       "price": 124545,
       "year": 2078,
       "id": 3
+    },
+    {
+      "name": "abc",
+      "qua": 5656,
+      "price": 78,
+      "year": 1212,
+      "id": 5
     }
   ],
   "comments": [

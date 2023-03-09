@@ -1,20 +1,28 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import List from '../../component/List/List'
+import { geticecream } from '../../redux/action/Aproduct.action';
 
-function Product(props) {
+function Product({avc}) {
     const [data, setData] = useState([])
     const [fdata, setFdata] = useState()
     const [sortData, setSortData] = useState()
     const [sData, setSData] = useState()
+    const icecreamData = useSelector(state => state.icecream);
+    const dispatch = useDispatch();
 
+
+    console.log(avc);
     useEffect(() => {
-        let localData = JSON.parse(localStorage.getItem("ice"));
+        // let localData = JSON.parse(localStorage.getItem("ice"));
 
-        if (localData !== null) {
-            setData(localData);
-        }
+        // if (localData !== null) {
+            // setData(localData);
+        // }
+        dispatch(geticecream())
+
     }, [])
 
     const handlesearch = (value) => {
@@ -69,8 +77,6 @@ function Product(props) {
 
     let finalData = fdata ? fdata : sortData ? sortData : data;
 
-
-
     return (
         <div className="container-fluid py-5">
             <div className="container py-5">
@@ -96,7 +102,7 @@ function Product(props) {
                             <option value="yl">Year: low to high</option>
                         </select>
                     </div>
-                    <List listdata={finalData} />
+                    <List listdata={icecreamData.icecream} />
                 </div>
             </div>
         </div>

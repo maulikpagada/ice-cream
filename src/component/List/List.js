@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardTitle, CardText, Button } from 'reactstrap';
 
 function List({ listdata }) {
+    console.log(listdata);
     return (
         <>
             <div className="container">
@@ -24,8 +25,8 @@ function List({ listdata }) {
                                                     </>
                                                     :
                                                     <>
-                                                        <span>{l.Des}</span>
-                                                        <p>{l.Txt}</p>
+                                                        <span>Des: {l.Des}</span>
+                                                        <p>Txt: {l.Txt}</p>
                                                     </>
                                             }
                                         </div>

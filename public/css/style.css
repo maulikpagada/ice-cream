@@ -11463,3 +11463,27 @@ button {
 .about-container .container{
   background-color: white !important;
 }
+.dark.nav-bar:before{
+  background: black;
+}
+
+.dark .navbar-brand h1{
+  color: #f195b2 !important;
+}
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+.dark.h1,
+.dark.h2,
+.dark.h3,
+.dark.h4,
+.dark.h5,
+.dark.h6 {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #fff !important;
+}

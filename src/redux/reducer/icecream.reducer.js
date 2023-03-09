@@ -31,15 +31,7 @@ export const icecreamReducer = (state = initState, action) => {
                 ...state,
                 icecream: uData
             }
-            
-        // case ActionTypes.ICECREAM_DELETE:
-        //     console.log(dData);
-        //     let dData = state.icecream.filter((m) => m.id !== action.payload)
 
-        //     return {
-        //         ...state,
-        //         icecream: dData
-        //     }
 
         case ActionTypes.ICECREAM_DELETE:
             let dData = state.icecream.filter((m) => m.id !== action.payload)

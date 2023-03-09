@@ -15,6 +15,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteicecream, geticecream, posticecream, puticecream } from '../../redux/action/Aproduct.action';
+import Product from '../../container/Product/Product';
 
 function Aproduct(props) {
     const [MedData, setMedData] = useState([]);
@@ -24,9 +25,12 @@ function Aproduct(props) {
     const icecreamData = useSelector(state => state.icecream);
     const dispatch = useDispatch();
 
+    let ie = [
+        { name: 'abc' }
+    ]
     // console.log(icecreamData.icecream);
 
-    const handleDClickOpen = () => {    
+    const handleDClickOpen = () => {
         setDOpen(true);
     };
 
@@ -49,14 +53,6 @@ function Aproduct(props) {
 
         dispatch(puticecream(values))
     }
-
-
-    // const hendelDelete = (id) => {
-    //     console.log(id);
-    //     dispatch(deleteicecream(id));
-    //     handleDClose();
-    //     setDid();
-    // }
 
     const hendelDelete = (id) => {
         handleDClose();
@@ -101,7 +97,7 @@ function Aproduct(props) {
         year: yup.number().required("please enter Year").positive().integer(),
     });
 
-    
+
     const formikobj = useFormik({
         initialValues: {
             name: '',
@@ -131,7 +127,7 @@ function Aproduct(props) {
         setValues(values);
     }
 
-    
+
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -235,7 +231,6 @@ function Aproduct(props) {
                                     }
 
                                 </DialogActions>
-
                             </Form>
                         </Formik>
                     </DialogContent>
@@ -252,12 +247,12 @@ function Aproduct(props) {
 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Are sure to delete this medicine.
+                        Are sure to delete this icecream.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => handleDClose()}>Disagree</Button>
-                    <Button onClick={() => hendelDelete()} autoFocus>
+                    <Button onClick={() => hendelDelete(did)} autoFocus>
                         Agree
                     </Button>
                 </DialogActions>
@@ -272,6 +267,8 @@ function Aproduct(props) {
                     checkboxSelection
                 />
             </div>
+            <Product avc={icecreamData.icecream} />
+            console.log(icecreamData.icecream);
 
         </div >
     );
